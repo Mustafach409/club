@@ -1,11 +1,14 @@
 /**
  * Store details of club memberships.
  * 
- * @author (your name) 
+ * @author Mustafa Chaudhary
  * @version 7.0
  */
+import java.util.ArrayList;
+import java.util.Iterator;
 public class Club
 {
+    private ArrayList<Membership> members;
     // Define any necessary fields here ...
     
     /**
@@ -13,8 +16,8 @@ public class Club
      */
     public Club()
     {
-        // Initialise any fields here ...
-        
+        //question 1
+        members = new ArrayList<>();// Initialise any fields here ...
     }
 
     /**
@@ -23,6 +26,8 @@ public class Club
      */
     public void join(Membership member)
     {
+        //question 3
+        members.add(member);
     }
 
     /**
@@ -31,6 +36,53 @@ public class Club
      */
     public int numberOfMembers()
     {
-        return 0;
+        //question 2
+        return members.size();
     }
+    /**
+* Remove from the club's collection all members who
+* joined in the given month, and return them stored
+* in a separate collection object.
+* @param month The month of the membership.
+* @param year The year of the membership.
+* @return The members who joined in the given month and year.
+*/
+    public int JoinedInMonth ( int month) {
+        if (month<=0 || month>12){
+            System.out.println("Invalid month: " + month );
+            return 0;
+        }
+        else {
+            int count = 0;
+            for (Membership m : members){
+                if (m.getMonth() == month){
+                    count++;
+                }
+            }
+        return count;
+        }
+    }
+public ArrayList<Membership> purge(int month, int year){
+        if (month<=0 || month>12){
+            System.out.println("Invalid month: " + month );
+            return null;
+        } else if (year<=1900 || year > 2026){
+            System.out.println("Invalid month: " + year );
+            return null;
+        }
+        else {
+            ArrayList<Membership> removals = new ArrayList();
+            Iterator<Membership> it = members.iterator();
+            while (it.hasNext()){
+                Membership m = it.next();
+                if (m.getMonth() == month && m.getYear()==year){
+                    System.out.println("membership found in" + month + "/" + year);
+                    removals.add(m);
+                    it.remove();
+                }
+            }
+        return removals;
 }
+}
+}
+
